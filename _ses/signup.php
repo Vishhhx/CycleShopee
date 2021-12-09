@@ -10,8 +10,10 @@
         $cpassword = $_POST["cpassword"];
         if($password==$cpassword){
             $hash=password_hash($password,PASSWORD_DEFAULT);
+            $tbl="CREATE TABLE `$username` ( `prNo` INT NOT NULL , `Target` VARCHAR(1) NOT NULL , `ordername` INT NOT NULL , `ordertime` INT NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE = InnoDB;";
             $sql = "INSERT INTO userdata (name,phoneno,username,password) values ('$name','$phn','$username','$hash');";
             $res = mysqli_query($conn,$sql);
+            mysqli_query($conn,$tbl);
             if($res){
                 header("Location: login.php");
             }else{
@@ -32,7 +34,7 @@
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-
+        <link rel="icon" type="image/x-icon" href="/cycleshopee/img/web_ico.jpg">
         <title>CycleShopee - SignUp</title>
         </head>
     <body class="bg-primary bg-gradient p-5 bg-opacity-50">

@@ -14,11 +14,11 @@
             $pricef=true;
             $sizef=false;
             $typef= false;
-        }elseif($size!=""){
+        }elseif($size!="Choose..."){
             $pricef=false;
             $sizef=true;
             $typef= false;
-        }elseif($type!=''){
+        }elseif($type!='Choose...'){
             $pricef=false;
             $sizef=false;
             $typef= true;
@@ -27,7 +27,6 @@
             $sizef=false;
             $typef=false;
         }
-        
     }
 ?>
 
@@ -42,10 +41,10 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-
+        <link rel="icon" type="image/x-icon" href="img/web_ico.jpg">
         <title>Cycle Shopee</title>
     </head>
-
+    
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -89,23 +88,82 @@
                 </div>
             </div>
         </nav>
+        <?php
+            $ins_atc=false;
+            if(isset($_GET['atc'])){
+                if (!isset($_SESSION['loggedin'])){
+                    echo '<div class="alert alert-warning mt-3 alert-dismissible fade show mt-3;" role="alert">
+                     Please <a href="_ses/login.php">login</a> to continue
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                 
+                }else{
+                    
+                 echo '<div class="alert alert-success mt-3 alert-dismissible fade show mt-3;" role="alert">
+                         <strong>Success!!</strong> One item added to cart successfullty 
+                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                     $ins_atc=true;
+
+                }
+        
+            }
+            $ins_atw=false;
+            if(isset($_GET['atw'])){
+                if (!isset($_SESSION['loggedin'])){
+                    echo '<div class="alert alert-warning mt-3 alert-dismissible fade show mt-3;" role="alert">
+                     Please <a href="_ses/login.php">login</a> to continue
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                 
+                }else{
+                    
+                 echo '<div class="alert alert-success mt-3 alert-dismissible fade show mt-3;" role="alert">
+                         <strong>Success!!</strong> One item added to wishlist successfullty 
+                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                     $ins_atw=true;
+
+                }
+        
+            }
+        ?>
         <div class="container border">
             <form action="shop.php" method="post">
                 <div class="row">
                     <div class="col">
-
+                        <input type="hidden" name="snoEdit" id="snoEdit">
                         <input type="text" name="price" placeholder="Enter Price"  id="price" class="m-1 form-control " name="price">
                         <button type="submit" class="btn btn-primary w-100 m-1">Filter by price</button>
                         </div><div class="col">
-                        <input type="text" name="size" placeholder="Enter size"  id="size" class="m-1 form-control " name="size">
+                        <div class="input-group m-1">
+                            <label class="input-group-text"  for="inputGroupSelect01">Select Size</label>
+                            <select class="form-select"  name="size" id="size">
+                                <option selected>Choose...</option>
+                                <option value="Small">Small</option>
+                                <option value="Large">Large</option>
+                                <option value="Medium">Medium</option>
+                            </select>
+                        </div>
+                        <!-- <input type="text" name="size" placeholder="Enter size"  id="size" class="m-1 form-control " name="size"> -->
                         <button type="submit" class="btn btn-primary w-100 m-1">Filter by size</button>
                     </div><div class="col">
-                        <input type="text" name="type" placeholder="Enter type"  id="type" class="m-1 form-control " name="type">
+                        <!-- <input type="text" name="type" placeholder="Enter type"  id="type" class="m-1 form-control " name="type"> -->
+                        <div class="input-group  m-1">
+                            <label class="input-group-text"  for="inputGroupSelect01">Select Type</label>
+                            <select class="form-select" name="type" id="type">
+                                <option selected>Choose...</option>
+                                <option value="BMX">BMX</option>
+                                <option value="MTB">MTB</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary w-100 m-1">Filter by type</button>
                     </div>
                 </div>
             </form>                             
         </div>
+        
         <div class="container my-3">
         <div class="row">
 
@@ -127,8 +185,10 @@
                 <img src="'.$row['image'].'" class="card-img-top" width="286px" height="214px" alt="...">
                 <div class="card-body">
                 <h5 class="card-title">'.$row['title'].'</h5>
+                <p class="card-text">Size: '.$row['size'].', Type:'.$row['type'].'</p>
                 <p class="card-text">Rs. '.$row['price'].'</p>
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <a href="shop.php?atc='.$row["id"].'" class="btn btn-primary addtocart" id='.$row["id"].'>Add to cart</a>
+                <a href="shop.php?atw='.$row["id"].'" class="btn btn-info addtowish ms-4" id='.$row["id"].'><img src="img/wishlist-icon.png" width=20> Wishlist</a>
                 </div>
                 </div>
                 </div>';
@@ -150,4 +210,29 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
         -->
     </body>
+    <script>
+        // atc = document.getElementsByClassName('addtocart');
+        // Array.from(atc).forEach((element)=>{
+        //     element.addEventListener("click",(e)=>{
+        //         snoEdit.value=e.target.id;
+        //         console.log(snoEdit.value);
+        //     })
+        // })
+    </script>
 </html>
+<?php
+    if($ins_atc){
+        $tblnm = $_SESSION['username'];
+        $prno=$_GET['atc'];
+        $insatc = "INSERT INTO `cycleshopee`.`$tblnm` (`prNo`, `Target`, `ordertime`) VALUES ($prno, 'c', 'current_timestamp()')";
+        $exct=mysqli_query($conn,$insatc);
+        echo $tblnm;
+    }
+    if($ins_atw){
+        $tblnm = $_SESSION['username'];
+        $prno=$_GET['atw'];
+        $insatc = "INSERT INTO `cycleshopee`.`$tblnm` (`prNo`, `Target`, `ordertime`) VALUES ($prno, 'w', 'current_timestamp()')";
+        $exct=mysqli_query($conn,$insatc);
+        echo $tblnm;
+    }
+?>

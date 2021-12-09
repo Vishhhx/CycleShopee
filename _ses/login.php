@@ -42,7 +42,7 @@
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-
+        <link rel="icon" type="image/x-icon" href="/cycleshopee/img/web_ico.jpg">
         <title>CycleShopee - Login</title>
         </head>
     <body class="bg-primary bg-gradient p-5 bg-opacity-50">
