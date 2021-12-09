@@ -10,7 +10,7 @@
         $cpassword = $_POST["cpassword"];
         if($password==$cpassword){
             $hash=password_hash($password,PASSWORD_DEFAULT);
-            $tbl="CREATE TABLE `$username` ( `prNo` INT NOT NULL , `Target` VARCHAR(1) NOT NULL , `ordername` INT NOT NULL , `ordertime` INT NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE = InnoDB;";
+            $tbl="CREATE TABLE `$username` ( `prNo` INT NOT NULL , `Target` VARCHAR(1) NOT NULL, `ordertime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() ) ENGINE = InnoDB;";
             $sql = "INSERT INTO userdata (name,phoneno,username,password) values ('$name','$phn','$username','$hash');";
             $res = mysqli_query($conn,$sql);
             mysqli_query($conn,$tbl);

@@ -11,7 +11,7 @@
     }
     if(isset($_GET['order'])){
         $tblnm = $_SESSION['username'];
-        $prno=$_GET['order'];
+        $prno= $_POST['snoOrd'];;
         // $delcrt = "DELETE FROM `cycleshopee`.`$tblnm` WHERE prNo=$prno";
         $plord = "UPDATE `$tblnm` SET `Target`='o' WHERE prNo = $prno";
         $exct=mysqli_query($conn,$plord);
@@ -75,7 +75,7 @@
     <?php
         if(isset($_GET['cancel'])){
             echo '<div class="alert alert-danger mt-3 alert-dismissible fade show mt-3;" role="alert">
-            One item removed from cart successfullty... 
+            One item removed from cart successfully... 
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
         }
@@ -84,6 +84,7 @@
             Order Placed Successfully, you will get brand new cycle soon!!! 
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
+            
         }
     ?>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -134,8 +135,8 @@
                         <div class="card-body">
                         <h5 class="card-title">'.$row1['title'].'</h5>
                         <p class="card-text">Rs. '.$row1['price'].'</p>
-                        <a href="cartt.php?cancel='.$row1['id'].'" class="btn btn-primary">Cancel Order</a>&nbsp;&nbsp;&nbsp;
-                        <a href="cartt.php?order='.$row1['id'].'" class="btn btn-warning">Place Order</a>
+                        <a class="btn btn-warning placeorder d-grid gap-2 mt-1" data-bs-toggle="modal" data-bs-target="#orderconf" id="'.$row1['id'].'">Place Order</a>
+                        <a href="cartt.php?cancel='.$row1['id'].'" class="mt-1 btn btn-primary d-grid gap-2">Remove from cart</a>
                         </div>
                         </div>
                         </div>';
@@ -148,5 +149,46 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="orderconf" tabindex="-1" aria-labelledby="orderconfLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderconfLabel">Place Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/cycleshopee/cartt.php?order=true" method="POST">
+                <div class="modal-body">
+                        <input type="hidden" name="snoOrd" id="snoOrd">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address">
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone No.</label>
+                            <input type="text" class="form-control" id="phone">
+                        </div>                             
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Pay and Place Order</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
+<script>
+    plo = document.getElementsByClassName('placeorder');
+    Array.from(plo).forEach((element)=>{
+        element.addEventListener('click',(e)=>{
+            console.log(element.id);
+            snoOrd.value=element.id;
+        });
+    })
+
+</script>
 </html>

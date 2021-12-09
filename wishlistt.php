@@ -12,7 +12,6 @@
     if(isset($_GET['atc'])){
         $tblnm = $_SESSION['username'];
         $prno=$_GET['atc'];
-        // $delcrt = "DELETE FROM `cycleshopee`.`$tblnm` WHERE prNo=$prno";
         $mtcrt = "UPDATE `$tblnm` SET `Target`='c' WHERE prNo = $prno";
         $exct=mysqli_query($conn,$mtcrt);
     }

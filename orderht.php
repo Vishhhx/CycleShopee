@@ -9,13 +9,6 @@
         $canord = "DELETE FROM `cycleshopee`.`$tblnm` WHERE prNo=$prno";
         $exct=mysqli_query($conn,$canord);
     }
-    // if(isset($_GET['atc'])){
-    //     $tblnm = $_SESSION['username'];
-    //     $prno=$_GET['atc'];
-    //     // $delcrt = "DELETE FROM `cycleshopee`.`$tblnm` WHERE prNo=$prno";
-    //     $mtcrt = "UPDATE `$tblnm` SET `Target`='c' WHERE prNo = $prno";
-    //     $exct=mysqli_query($conn,$mtcrt);
-    // }
 ?>
 <!doctype html>
 <html lang="en">
@@ -79,12 +72,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
         }
-        // if(isset($_GET['atc'])){
-        //     echo '<div class="alert alert-success mt-3 alert-dismissible fade show mt-3;" role="alert">
-        //     One item moved to cart successfullty... 
-        //     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        //     </div>';
-        // }
     ?>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="container padding-bottom-3x mb-0">
@@ -121,7 +108,7 @@
                     if($num==0){
                         echo'
                         <div class="col-md-1 text-center m-5 fs-1"></div>
-                        <div class="col-md-3 text-center m-5 fs-3"><img src="img/empty-cart.png" width="150" class="mb-3"></br> Order Something!!</br><div class="fs-6">Add items to it!</div></br><a href="shop.php" class="btn btn-primary mt-1 d-grid gap-2">Shop Now</a></div>';
+                        <div class="col-md-3 text-center m-5 fs-3"><img src="img/empty-cart.png" width="150" class="mb-3"></br> Order Something!!</br></br><a href="shop.php" class="btn btn-primary mt-1 d-grid gap-2">Shop Now</a></div>';
                     }
                     while($row=mysqli_fetch_assoc($res)){
                         $sql="SELECT * FROM products where id=".$row['prNo']."";

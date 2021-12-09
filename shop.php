@@ -145,10 +145,8 @@
                                 <option value="Medium">Medium</option>
                             </select>
                         </div>
-                        <!-- <input type="text" name="size" placeholder="Enter size"  id="size" class="m-1 form-control " name="size"> -->
                         <button type="submit" class="btn btn-primary w-100 m-1">Filter by size</button>
                     </div><div class="col">
-                        <!-- <input type="text" name="type" placeholder="Enter type"  id="type" class="m-1 form-control " name="type"> -->
                         <div class="input-group  m-1">
                             <label class="input-group-text"  for="inputGroupSelect01">Select Type</label>
                             <select class="form-select" name="type" id="type">
@@ -197,28 +195,13 @@
             ?>
             </div>  
         </div>
-            <!-- Optional JavaScript; choose one of the two! -->
-            
-        <!-- Option 1: Bootstrap Bundle with Popper -->
+           
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
         crossorigin="anonymous"></script>
 
-        <!-- Option 2: Separate Popper and Bootstrap JS -->
-        <!--
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
-        -->
+        
     </body>
-    <script>
-        // atc = document.getElementsByClassName('addtocart');
-        // Array.from(atc).forEach((element)=>{
-        //     element.addEventListener("click",(e)=>{
-        //         snoEdit.value=e.target.id;
-        //         console.log(snoEdit.value);
-        //     })
-        // })
-    </script>
 </html>
 <?php
     if($ins_atc){
