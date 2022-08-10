@@ -1,6 +1,9 @@
 <?php
     $perr=false;
     $usert=false;
+    $name = "";
+    $username = "";
+    $phn = "";
     include "_dbconn.php";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $name = $_POST["name"];
@@ -21,6 +24,9 @@
             }
         }else{
             $perr=true;
+            $session = $_POST["name"];
+            $username = $_POST["username"];
+            $phn = $_POST["phn"];
         }
     }
 ?>
@@ -42,16 +48,19 @@
         <div class="mb-1 fs-1 text-center">SignUp to <b>Cycle Shopee</b></div>
         <div class="mb-3">
             <label for="name" class="form-label">Your Name</label>
-            <input type="text" class="form-control" name="name" id="name">
+            <?php
+                echo '<input type="text" class="form-control" name="name" id="name" value="'.$name.'">'
+            ?>
+            
         </div>
         <label for="basic-addon1 mb-3" class="form-label">Your Phone Number</label>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">+91</span>
-            <input type="text" class="form-control" id="phn" name="phn" aria-describedby="basic-addon1">
+            <?php echo '<input type="text" class="form-control" id="phn" name="phn" aria-describedby="basic-addon1" value = "'.$phn.'">' ?>
         </div>
         <div class="mb-3">
             <label for="username" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+            <?php echo '<input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" value = "'.$username.'">' ?>
         </div>
         <?php 
             if($usert){

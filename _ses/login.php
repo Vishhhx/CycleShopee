@@ -1,6 +1,8 @@
 <?php
     $login=false;
     $crerr=false;
+    $usererr=false;
+    $username = "";
     include "_dbconn.php";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username=$_POST["username"];
@@ -24,10 +26,13 @@
                 $_SESSION['name'] = $name;
                 $_SESSION['username'] = $username;
                 header("location: /cycleshopee/index.php");
+            }else{
+                $crerr = true;
             }
             
         }else{
-            $crerr=true;
+            $usererr=true;            
+            $username=$_POST["username"];
         }
     }
 
@@ -50,16 +55,17 @@
     <form class="container w-50 align-middle position-absolute top-50 start-50 translate-middle border p-5 bg-white" method="post" action="login.php">
         <div class="mb-3">
             <label for="username" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="username" aria-describedby="emailHelp" name="username">
+            <?php echo '<input type="email" class="form-control" id="username" aria-describedby="emailHelp" name="username" value = "'.$username.'">'; ?>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <?php 
-            if($crerr){
-                echo"<div class='mb-3' style='color:red'>Invalid Credentials</div>";
-            }
+            echo"<div class='mb-3' style='color:red'>";
+            if($usererr) echo "No account registered with this username... Please <a href='signup.php'> SignUp Here</a>";
+            if($crerr) echo "Incorrect Password... please enter correct password and try again";
+            echo "</div>";
         ?>
         <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
         <div class="text-center mt-3">

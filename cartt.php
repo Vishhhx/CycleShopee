@@ -35,7 +35,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Cycle Shopee</a>
+            <a class="navbar-brand" href="index.php">Cycle Shopee</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -163,12 +163,12 @@
                         <input type="hidden" name="snoOrd" id="snoOrd">
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address">
+                            <input type="text" class="form-control" id="address" required>
                             
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone No.</label>
-                            <input type="text" class="form-control" id="phone">
+                            <input type="text" class="form-control" id="phone" required>
                         </div>                             
                 </div>
                 

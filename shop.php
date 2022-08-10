@@ -2,15 +2,18 @@
     $pricef=false;
     $sizef=false;
     $typef=false;
+    $minprice = "";
+    $maxprice = "";
     include "_ses/_dbconn.php";
     session_start();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         $pricef=true;
-        $price=$_POST["price"];
+        $minprice=$_POST["minprice"];
+        $maxprice=$_POST["maxprice"];
         $size=$_POST["size"];
         $type=$_POST["type"];
-        if($price!=''){
+        if($minprice!='' || $maxprice!=''){
             $pricef=true;
             $sizef=false;
             $typef= false;
@@ -48,7 +51,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Cycle Shopee</a>
+                <a class="navbar-brand" href="index.php">Cycle Shopee</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -111,9 +114,10 @@
             $ins_atw=false;
             if(isset($_GET['atw'])){
                 if (!isset($_SESSION['loggedin'])){
-                    echo '<div class="alert alert-warning mt-3 alert-dismissible fade show mt-3;" role="alert">
-                     Please <a href="_ses/login.php">login</a> to continue
-                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    echo '
+                    <div class="alert alert-warning mt-3 alert-dismissible fade show mt-3;" role="alert">
+                        Please <a href="_ses/login.php">login</a> to continue
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
                  
                 }else{
@@ -133,7 +137,14 @@
                 <div class="row">
                     <div class="col">
                         <input type="hidden" name="snoEdit" id="snoEdit">
-                        <input type="text" name="price" placeholder="Enter Price"  id="price" class="m-1 form-control " name="price">
+                        <div class="row">
+                            <div class="col"> <input type="text" name="minprice" placeholder="Enter Minimum Price"  id="minprice" class="m-1 form-control " <?php 
+                                if($minprice!='') echo'value="'.$minprice.'"';
+                            ?>></div>
+                            <div class="col"> <input type="text" name="maxprice" placeholder="Enter Maximum Price"  id="maxprice" class="m-1 form-control " <?php
+                                if($maxprice!='') echo'value="'.$maxprice.'"';
+                            ?>></div>
+                        </div>
                         <button type="submit" class="btn btn-primary w-100 m-1">Filter by price</button>
                         </div><div class="col">
                         <div class="input-group m-1">
@@ -167,7 +178,9 @@
 
             <?php
             if($pricef==true){
-                $sql="SELECT * FROM products where price < $price";
+                if($minprice=="") $sql = "SELECT * FROM products where price < $maxprice";
+                elseif($maxprice=="") $sql="SELECT * FROM products where price > $minprice";
+                else $sql="SELECT * FROM products where price < $maxprice and price > $minprice";
             }elseif($sizef==true){
                 $sql="SELECT * FROM products where size = '$size'";
             }elseif($typef==true){
